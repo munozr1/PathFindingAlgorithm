@@ -1,0 +1,13 @@
+1. open a file containing a matrix graph for nodes
+
+Connectivity Matrix Graph :
+	
+	[ 0 0 0 1 ]
+	[ 1 1 0 0 ]
+	[ 1 1 2 1 ]
+	[ 0 0 0 2 ]
+4 nodes in an UNDIRECTED graph
+
+
+Take in 2 numbers to allocate memory for matrix (rows and cols)
+Value of col is the weight and a 0 represents no connection
