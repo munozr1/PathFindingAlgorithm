@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#define INF 999
+#define MAX 10
 
 void createSPT(int *spt, int nodes);
 void createAM(int *matrix, int nodes);
@@ -60,4 +61,61 @@ void createSPT(int *spt, int nodes) // create shortest path tree array
     }
     printf("\n");
     
+}
+
+void dijkstra(int *matrix, int n)
+{
+    int cost[MAX][MAX], dist[MAX], visited[MAX],pred[MAX];
+    int count, min,nextNode;
+    
+    //fill in cost array
+    for(int i =0; i<n; i++)
+    {
+        for(int j =0; j<n;j++)
+        {
+            if(matrix[i][j] ==0)
+                cost[i][j] = INF;
+            else(matrix[i][j] ==0)
+            cost[i][j] = matrix[i][j];
+        }
+    }
+    
+    for(int i =0; i<n; i++) //fill in dist array and visited array
+    {
+        dist[i] = cost[0][i];
+        pred[i] = 0;
+        visited[i] =0;
+    }
+    
+    dist[0] = 0;
+    visited[i] = 1;
+    count =1;
+    
+    while(count<n-1) //traversing the tree for shortest path
+    {
+        min = INF;
+        for(int i =0; i <n; i++)
+        {
+            if(dist[i]<min && !visited[i])
+            {
+                min = dist[i];
+                nextNode = i;
+            }
+        }
+        visited[nextNode] =1;
+        
+        
+        for(int i =0; i<n; i++)
+        {
+            if(!visited[i])
+            {
+                if((min + cost[nextNode][i]) <dist[i])
+                {
+                    dist[i] =min + cost[nextNode][i];
+                    pred[i] = nextNode;
+                }
+            }
+        }
+        count++;
+    }
 }
