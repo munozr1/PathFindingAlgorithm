@@ -2,21 +2,20 @@
 #include <stdlib.h>
 
 
-
-void createAM(int *matrix, int row, int col);
+void createSPT(int *spt, int nodes);
+void createAM(int *matrix, int nodes);
 int main(int argc, char *argv[])
 {
     FILE *fptr;
     int *matrix;
-    bool *spt;
-    int nodeRow =0, nodeCol=0;    // nodeRow is the current node we are on and
+    int *spt;
+    int nodes;    // nodeRow is the current node we are on and
                                   // nodeCol is the node nodeRow connects to
                                   // value of nodeCol is how direct connections there are between the two nodes
     
-    printf("Enter how many rows: \n");
-    scanf(" %d", &nodeRow);
-    printf("Enter how many cols: \n");
-    scanf(" %d", &nodeCol);
+    printf("Enter how many nodes: \n");
+    scanf(" %d", &nodes);
+    
     
     fptr = fopen("/Volumes/Work/projects/pathFinding/nodes.txt", "r+"); //open file containing matrix
     
@@ -29,13 +28,16 @@ int main(int argc, char *argv[])
     printf("opened file successfully\n");
     
     fclose(fptr); // close file containing matrix
-    createAM(matrix,nodeRow, nodeCol);
+    createAM(matrix,nodes);
+    createSPT(spt, nodes);
     free(matrix);// free allocated memory
     free(spt);
 	return 0;
 }
-void createAM(int *matrix, int row, int col) // allocate memory for matrix and set to default values
+void createAM(int *matrix, int nodes) // allocate memory for matrix and set to default values
 {
+    int row = nodes;
+    int col = nodes;
     matrix = (int *)malloc((row*col)*sizeof(int));
     for(int i=0; i<row*col;i++)
     {
@@ -46,8 +48,16 @@ void createAM(int *matrix, int row, int col) // allocate memory for matrix and s
     printf("\n");
     
 }
-void createSPT(int *spt, int row, int col)
+void createSPT(int *spt, int nodes) // create shortest path tree array
 {
+    int row = nodes;
+    int col = nodes;
     spt = (int *)malloc((row*col)*sizeof(int));
+    printf("\n SPT \n");
+    for(int i =0; i < row*col;i++){
+        spt[i] = i+1;
+        printf("\n %d",spt[i]);
+    }
+    printf("\n");
     
 }
